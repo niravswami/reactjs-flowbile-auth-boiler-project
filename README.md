@@ -1,4 +1,4 @@
-![Screen shot](https://github.com/niravswami/reactjs-flowbile-auth-boiler-project/blob/main/public/logo192.png)
+![Screen shot](https://github.com/niravswami/reactjs-flowbile-auth-boiler-project/blob/main/public/Screenshot1.png)
 
 # Getting Started with Create React App
 
