@@ -1,9 +1,10 @@
 import React, { Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { CookiesProvider } from "react-cookie";
 import axios from "axios";
 import {
 	axiosErrorInterceptor,
+	axiosResponseErrorInterceptor,
+	axiosResponseSuccesInterceptor,
 	axiosSuccesInterceptor,
 } from "./libs/axios/axiosInstance";
 import { BACKEND_API_DOMAIN, ROUTER } from "./routes/routes";
@@ -12,6 +13,10 @@ import { Flowbite } from "flowbite-react";
 
 axios.defaults.baseURL = BACKEND_API_DOMAIN;
 axios.interceptors.request.use(axiosSuccesInterceptor, axiosErrorInterceptor);
+axios.interceptors.response.use(
+	axiosResponseSuccesInterceptor,
+	axiosResponseErrorInterceptor
+);
 
 const loading = (
 	<div className="pt-3 text-center">
@@ -41,13 +46,11 @@ function App() {
 		<div className="App">
 			<AuthProvider>
 				<Flowbite>
-					<CookiesProvider>
-						<Suspense fallback={loading}>
-							<BrowserRouter>
-								<Routes>{processRoutes(ROUTER)}</Routes>
-							</BrowserRouter>
-						</Suspense>
-					</CookiesProvider>
+					<Suspense fallback={loading}>
+						<BrowserRouter>
+							<Routes>{processRoutes(ROUTER)}</Routes>
+						</BrowserRouter>
+					</Suspense>
 				</Flowbite>
 			</AuthProvider>
 		</div>
