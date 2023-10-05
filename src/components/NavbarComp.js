@@ -2,6 +2,7 @@ import { Avatar, DarkThemeToggle, Dropdown } from "flowbite-react";
 import React, { useContext } from "react";
 import { AuthContext } from "../context/AuthProvider";
 import useAuth from "../apiHooks/useAuth";
+import { Link } from "react-router-dom";
 
 export default function NavbarComp() {
 	const { user } = useContext(AuthContext);
@@ -44,10 +45,7 @@ export default function NavbarComp() {
 						</svg>
 						<span className="sr-only">Toggle sidebar</span>
 					</button>
-					<a
-						href="https://flowbite.com"
-						className="flex items-center justify-between mr-4"
-					>
+					<Link to={"/"} className="flex items-center justify-between mr-4">
 						<img
 							src="https://flowbite.s3.amazonaws.com/logo.svg"
 							className="mr-3 h-8"
@@ -56,7 +54,7 @@ export default function NavbarComp() {
 						<span className="self-center text-2xl text-white font-semibold whitespace-nowrap dark:text-white">
 							Flowbite
 						</span>
-					</a>
+					</Link>
 				</div>
 				<div className="flex items-center lg:order-2">
 					<button

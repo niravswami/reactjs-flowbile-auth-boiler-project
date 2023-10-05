@@ -1,23 +1,19 @@
-import React, { useLayoutEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import isTokenValid from "../../helpers/isTokenValid";
+import React from "react";
+import useRedirectBackIfAuthenticated from "../../hooks/useRedirectBackIfAuthenticated";
+import { Spinner } from "flowbite-react";
 
 export default function GuestRouteMiddleware({ children }) {
-	const navigate = useNavigate();
+	const { isChecking } = useRedirectBackIfAuthenticated();
 
-	useLayoutEffect(() => {
-		async function check() {
-			try {
-				const isValid = await isTokenValid(localStorage.getItem("token"));
-				if (isValid) {
-					navigate(-1);
-				}
-			} catch (error) {
-				console.error(error);
-			}
-		}
-		check();
-	}, [navigate]);
-
-	return <div>{children}</div>;
+	return (
+		<div>
+			{isChecking ? (
+				<div className="pt-3  h-screen flex justify-center items-center">
+					<Spinner aria-label="Center-aligned spinner example" size="xl" />
+				</div>
+			) : (
+				children
+			)}
+		</div>
+	);
 }

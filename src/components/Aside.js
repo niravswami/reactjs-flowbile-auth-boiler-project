@@ -7,8 +7,8 @@ import { AUTH_PATH } from "../routes/authRoutes";
 export default function Aside() {
 	const asideitems = [
 		{
-			href: "/home",
-			text: "Home",
+			href: "/dashboard",
+			text: "Dashboard",
 		},
 		{
 			href: PROTECTED_PATH.CONTACT_US,
@@ -71,12 +71,16 @@ export default function Aside() {
 							))}
 						</Sidebar.ItemGroup>
 						<Sidebar.ItemGroup>
-							<Sidebar.Item href={AUTH_PATH.LOGIN}>
-								<p>Login</p>
-							</Sidebar.Item>
-							<Sidebar.Item href={AUTH_PATH.REGISTER}>
-								<p>Sign up</p>
-							</Sidebar.Item>
+							<Link to={AUTH_PATH.LOGIN}>
+								<Sidebar.Item as="div">
+									<p>Login</p>
+								</Sidebar.Item>
+							</Link>
+							<Link to={AUTH_PATH.REGISTER}>
+								<Sidebar.Item as="div">
+									<p>Sign up</p>
+								</Sidebar.Item>
+							</Link>
 						</Sidebar.ItemGroup>
 					</Sidebar.Items>
 				</Sidebar>

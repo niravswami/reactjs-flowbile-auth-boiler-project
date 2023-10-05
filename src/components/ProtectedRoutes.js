@@ -1,24 +1,20 @@
-import React, { useLayoutEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { GUEST_ROUTES } from "../routes/guestRoutes";
-import isTokenValid from "../helpers/isTokenValid";
+import React from "react";
+
+import { Spinner } from "flowbite-react";
+import useRedirectToLoginPageIfNotAuthenticated from "../hooks/useRedirectToLoginPageIfNotAuthenticated";
 
 export default function ProtectedRoutes({ children }) {
-	const navigate = useNavigate();
+	const { isChecking } = useRedirectToLoginPageIfNotAuthenticated();
 
-	useLayoutEffect(() => {
-		async function check() {
-			try {
-				const isValid = await isTokenValid(localStorage.getItem("token"));
-				if (!isValid) {
-					navigate(GUEST_ROUTES.LOGIN);
-				}
-			} catch (error) {
-				console.error(error);
-			}
-		}
-		check();
-	}, [navigate]);
-
-	return <div>{children}</div>;
+	return (
+		<div>
+			{isChecking ? (
+				<div className="pt-3  h-screen flex justify-center items-center">
+					<Spinner aria-label="Center-aligned spinner example" size="xl" />
+				</div>
+			) : (
+				children
+			)}
+		</div>
+	);
 }

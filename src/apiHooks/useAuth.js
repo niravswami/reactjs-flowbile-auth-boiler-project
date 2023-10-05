@@ -20,7 +20,7 @@ export default function useAuth() {
 			const res = await axios.post(`${BACKEND_API_URL_V1}/signup`, formValues);
 
 			setAuthUser({ userData: res?.data?.user, token: res?.data?.token });
-			navigate(PROTECTED_PATH.HOME);
+			navigate(PROTECTED_PATH.DASHBOARD);
 		} catch (error) {
 			console.error("err", error);
 			if (error?.response?.data?.errors)
@@ -34,7 +34,7 @@ export default function useAuth() {
 		try {
 			const res = await axios.post(`${BACKEND_API_URL_V1}/login`, credentials);
 			setAuthUser({ userData: res?.data?.user, token: res?.data?.token });
-			navigate(PROTECTED_PATH.HOME);
+			navigate(PROTECTED_PATH.DASHBOARD);
 		} catch (error) {
 			console.error("err", error);
 			if (error?.response?.data?.errors)

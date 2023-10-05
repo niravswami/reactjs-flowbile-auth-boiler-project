@@ -4,14 +4,13 @@ import { DateFromTodayProvider } from "../context/DateFromTodayProvider";
 
 const Layout = lazy(() => import("../components/Layout/Layout"));
 const ProtectedRoutes = lazy(() => import("../components/ProtectedRoutes"));
-const Home = lazy(() => import("../pages/Home"));
+const Dashboard = lazy(() => import("../pages/Dashboard"));
 const About = lazy(() => import("../pages/About"));
 const DateFromToday = lazy(() => import("../pages/DateFromToday"));
 const Contact = lazy(() => import("../pages/Contact"));
 
 export const PROTECTED_PATH = {
 	DASHBOARD: "/dashboard",
-	HOME: "/home",
 	ABOUT: "/about",
 	DATE_FROM_TODAY: "/date-from-today",
 	CONTACT_US: "/contact-us",
@@ -28,8 +27,8 @@ export const PROTECTED_ROUTES = [
 		),
 		children: [
 			{
-				path: PROTECTED_PATH.HOME,
-				element: <Home />,
+				path: PROTECTED_PATH.DASHBOARD,
+				element: <Dashboard />,
 				errorElement: ErrorEle,
 			},
 			{
